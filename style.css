@@ -1,0 +1,373 @@
+/* === CSS de voz_carro (con fondo animado y mejoras visuales) === */
+
+/* Fondo general */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #6a11cb, #2575fc, #00c9a7, #ff758c);
+  background-size: 400% 400%;
+  animation: moverFondo 12s ease infinite;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animación del fondo */
+@keyframes moverFondo {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Contenedor principal */
+.container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 720px; /* aumentado para que entren historial y movimientos */
+  text-align: center;
+  margin: 30px;
+  backdrop-filter: blur(6px);
+  box-sizing: border-box;
+}
+
+h1 {
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+}
+
+/* Botones base */
+button {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  font-family: inherit;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* === Botón principal de micrófono === */
+.btn-voice {
+  background: linear-gradient(145deg, #6a11cb, #2575fc);
+  color: white;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  margin-bottom: 10px;
+}
+
+.btn-voice:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(37, 117, 252, 0.4);
+}
+
+/* === Botón para volver al control manual === */
+.btn-gamepad {
+  background: linear-gradient(145deg, #ffd166, #ff9f1c);
+  color: #081219;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(255,159,28,0.14);
+  transition: transform .12s ease, box-shadow .12s ease;
+  margin-bottom: 10px;
+}
+
+.btn-gamepad:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(255,159,28,0.22);
+}
+
+/* Botones secundarios */
+#clearHistory, #toggleMode {
+  background-color: #1bb3a5;
+  color: white;
+  margin-top: 10px;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+#status, #action {
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+/* === Sección de movimientos === */
+.movimientos-bonitos {
+  margin-top: 28px;
+  text-align: center;
+}
+
+/* Dividimos el layout en dos columnas en pantallas grandes */
+@media (min-width: 820px) {
+  .layout-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px; /* movimientos | panel derecho (historial) */
+    gap: 22px;
+    align-items: start;
+  }
+}
+
+/* Movimientos grid */
+.movimientos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 18px;
+  justify-items: center;
+  padding: 12px;
+}
+
+/* === Tarjetas de movimiento === */
+.mov-card {
+  background: #f1f1f1;
+  padding: 12px 10px;
+  width: 140px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, background 0.3s ease;
+  text-align: center;
+}
+
+.mov-card:hover {
+  transform: scale(1.08);
+}
+
+/* Colores por tipo de movimiento */
+.adelante { background-color: #a0e9e0; }
+.atras { background-color: #f7b4ad; }
+.detener { background-color: #d4d4d4; }
+
+.vuelta-adelante-derecha { background-color: #b5d1ff; }
+.vuelta-adelante-izquierda { background-color: #fbe79b; }
+.vuelta-atras-derecha { background-color: #ffb6c1; }
+.vuelta-atras-izquierda { background-color: #ffd59e; }
+
+.giro90-derecha { background-color: #d3a3ff; }
+.giro90-izquierda { background-color: #e6c9ff; }
+.giro360-derecha { background-color: #aef5c4; }
+.giro360-izquierda { background-color: #9de3b5; }
+
+/* === Tema oscuro (modo noche) === */
+body.dark-mode {
+  background: linear-gradient(135deg, #141e30, #243b55);
+  color: #fff;
+  animation: moverFondo 12s ease infinite;
+}
+
+body.dark-mode .container {
+  background: rgba(24, 24, 28, 0.96);
+  color: #fff;
+}
+
+body.dark-mode .mov-card {
+  background-color: #333;
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(255,255,255,0.04);
+}
+
+/* === Historial - card compacta con scroll ===== */
+.history-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  padding: 12px;
+  width: 100%;
+  max-width: 420px; /* ancho del panel derecho */
+  box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+  margin: 0 auto 18px auto;
+  box-sizing: border-box;
+}
+
+/* header con etiqueta y contador */
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.progress-label {
+  font-size: 0.95rem;
+  color: #0a2f2d;
+  font-weight: 700;
+}
+.session-counter {
+  font-size: 0.9rem;
+  background: rgba(0,0,0,0.06);
+  color: #052727;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+/* track y fill de la "barrita" */
+.progress-track {
+  height: 8px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.03), rgba(0,0,0,0.01));
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00e6e6, #7bdff6);
+  box-shadow: 0 4px 18px rgba(0,230,230,0.08);
+  transition: width 400ms ease;
+}
+
+/* contenedor con alto máximo y scroll */
+.history-container {
+  max-height: 210px; /* no crece demasiado */
+  overflow-y: auto;
+  padding-right: 6px; /* para que el scroll no tape el contenido */
+  margin-bottom: 10px;
+}
+
+/* lista y items */
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* cada entrada: layout en dos columnas */
+.history-list li,
+.history-item {
+  background: rgba(0,0,0,0.03);
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: #052727;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+
+/* fila principal: icon + movimiento | timestamp */
+.history-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.history-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.history-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: inline-grid;
+  place-items: center;
+  font-size: 18px;
+  background: linear-gradient(135deg, rgba(0,230,230,0.12), rgba(124,58,237,0.06));
+  color: #072f2f;
+  box-shadow: 0 4px 12px rgba(0,230,230,0.04);
+}
+.history-mov {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.history-time {
+  font-size: 0.78rem;
+  opacity: 0.85;
+  color: #0b3b3a;
+  white-space: nowrap;
+}
+
+/* barra pequeña por entrada (visual de "tiempo" o progreso) */
+.entry-bar {
+  height: 6px;
+  width: 100%;
+  background: rgba(0,0,0,0.02);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.entry-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#7bdff6,#00e6e6);
+  transition: width 400ms ease;
+}
+
+/* scroll personalizado (WebKit) */
+.history-container::-webkit-scrollbar {
+  width: 8px;
+}
+.history-container::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.02);
+  border-radius: 8px;
+}
+.history-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.4));
+  border-radius: 8px;
+  border-left: 2px solid rgba(255,255,255,0.02);
+}
+
+/* acciones debajo del historial */
+.history-actions {
+  display:flex;
+  justify-content:flex-end;
+  gap: 8px;
+}
+
+/* === Ajuste responsive === */
+@media (max-width:420px) {
+  .btn-gamepad, .btn-voice {
+    width: 90%;
+    max-width: 260px;
+  }
+
+  .mov-card {
+    width: 120px;
+  }
+
+  .history-card { max-width: 100%; padding: 10px; }
+  .history-container { max-height: 160px; }
+  .history-icon { width: 30px; height: 30px; font-size: 16px; }
+}
+
+/* extra small screens: apilar todo */
+@media (max-width: 820px) {
+  .layout-grid { display: block; }
+  .history-card { margin-top: 18px; }
+}
+
+/* util: ajustar colores en modo oscuro para el panel del historial */
+body.dark-mode .history-card {
+  background: rgba(20,20,26,0.95);
+  color: #eafcff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+body.dark-mode .history-list li,
+body.dark-mode .history-item {
+  background: rgba(255,255,255,0.02);
+  color: #e6ffff;
+}
+body.dark-mode .history-icon {
+  background: linear-gradient(135deg, rgba(6,182,212,0.12), rgba(124,58,237,0.06));
+  color: #eaffff;
+}
+

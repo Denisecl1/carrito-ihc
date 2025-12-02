@@ -1,0 +1,446 @@
+/* === Estilos base === */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+    135deg,
+   #ff00ff,
+    #00ffff94,
+    #7700ff,
+    #ff0040ad,
+    #0099ff
+  );
+  background-size: 600% 600%;
+  animation: fondoCiclo 8s ease infinite alternate;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Animación más suave del fondo */
+@keyframes fondoCiclo {
+  0% { background-position: 0% 50%; filter: brightness(1.1) contrast(1.2); }
+  50% { background-position: 100% 50%; filter: brightness(1.3) contrast(1.3); }
+  100% { background-position: 0% 50%; filter: brightness(1.1) contrast(1.2); }
+}
+
+header {
+  width: 100%;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  font-weight: 700;
+  font-size: 1.5rem;
+  border-bottom: 3px solid #00ffff;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 30px;
+}
+
+/* === Secciones === */
+section {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.644);
+}
+
+h2 {
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff;
+  margin-bottom: 15px;
+}
+
+/* === Botones === */
+.btn-move, .btn-stop {
+  background: #00bfff;
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-move:hover, .btn-stop:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #00ffff;
+}
+
+.btn-stop {
+  background: #ff4081;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px; /* antes 10px → más separación vertical */
+}
+
+.horizontal {
+  display: flex;
+  gap: 25px; /* antes 10px → más separación entre botones horizontales */
+}
+
+
+/* === Tabla === */
+.tabla-container {
+  margin-top: 15px;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+table {
+  width: 100%;
+  color: white;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  color: #00ffff;
+}
+
+#tablaUltimos tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* === Footer === */
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 18px 0;
+  background: linear-gradient(90deg, #ff00ff, #00ffff, #ff8000);
+  background-size: 200% 200%;
+  animation: footerGradient 6s ease infinite;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+  border-top: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes footerGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.brillo {
+  background: linear-gradient(90deg, #00ffff, #ffffff, #ff00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: brilloTexto 3s linear infinite;
+}
+
+@keyframes brilloTexto {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* === Spinner y estado === */
+.spinner {
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #000000;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#btnUltimos {
+  position: relative;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+#estadoMovimientos {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #00e6e6;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* === Sección de últimos movimientos === */
+.ultimos-movimientos {
+  flex: 1 1 100%;
+  max-width: 600px;
+  margin: 40px auto 0 auto;
+  text-align: center;
+}
+
+/* === Botón limpiar === */
+.btn-clear {
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.12);
+  color: #fff;
+  padding: .45rem .6rem;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .3rem;
+  cursor: pointer;
+}
+.btn-clear svg { color: #fff; opacity: 0.95; }
+
+.estado {
+  margin-top: 0.7rem;
+  font-weight: 600;
+  color: #eafcff;
+  text-align: center;
+  padding: .45rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  background: linear-gradient(180deg, rgba(0,0,0,0.09), rgba(255,255,255,0.02));
+}
+
+/* === 🎮 NUEVO DISEÑO: Control compacto y animado === */
+.control-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 25px;
+  padding: 40px 50px; /* más aire alrededor */
+  box-shadow: 0 0 25px rgba(0,255,255,0.2);
+  max-width: 320px; /* antes 280px */
+  margin: 20px auto;
+  gap: 25px; /* espacio entre filas del control */
+}
+
+/* === Control de Movimientos === */
+.control-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 25px;
+  padding: 40px 50px;
+  box-shadow: 0 0 25px rgba(0,255,255,0.2);
+  max-width: 320px;
+  gap: 25px;
+}
+
+.middle-row, .spin-row {
+  display: flex;
+  gap: 30px; /* antes 20px → separación entre botones */
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Botones tipo joystick */
+.btn-joystick {
+  background: linear-gradient(145deg, #00bcd4, #0097a7);
+  color: rgb(212, 212, 212);
+  border: none;
+  border-radius: 15px;
+  padding: 16px 24px; /* más cómodo al tacto */
+  font-size: 18px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 15px rgba(0,255,255,0.3);
+  min-width: 90px; /* más anchos */
+}
+
+.btn-joystick:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #00ffff;
+}
+
+/* Botón central (stop) */
+.btn-stop-joystick {
+  background: linear-gradient(145deg, #ff4081, #e91e63);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 15px;
+  width: 60px;
+  height: 60px;
+  font-size: 20px;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 20px rgba(255, 64, 129, 0.4);
+}
+
+.btn-stop-joystick:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #ff4081;
+}
+
+/* Luces dinámicas */
+.btn-joystick.glow {
+  animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 10px #00ffff; }
+  100% { box-shadow: 0 0 30px #ff00ff; }
+}
+
+/* Efecto especial para los giros */
+.spin-left, .spin-right {
+  animation: spinLight 3s infinite alternate;
+}
+
+@keyframes spinLight {
+  0% { box-shadow: 0 0 10px #00ffff; }
+  100% { box-shadow: 0 0 20px #ffa500; }
+}
+  
+/* === CONTENEDOR PRINCIPAL: Control + Últimos movimientos === */
+.main-panel {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px; /* espacio entre el control y el historial */
+  flex-wrap: wrap; /* permite adaptarse en pantallas pequeñas */
+  margin-top: 40px;
+}
+
+/* === Card Asistente de Voz (control_carrito) === */
+.voice-assistant {
+  background: linear-gradient(180deg, rgba(10,20,30,0.45), rgba(0,0,0,0.35));
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Header */
+.voice-head {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.voice-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #7c3aed, #0ea5a0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.18);
+}
+.voice-title {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #eaffff;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+.voice-sub {
+  margin: 0;
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Actions row */
+.voice-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* Principal: botón grande y atractivo */
+.btn-voice-large {
+  background: linear-gradient(135deg, #06b6d4, #0ea5b5);
+  color: #001219;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(6, 182, 212, 0.14);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn-voice-large:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(6, 182, 212, 0.22);
+}
+
+/* Botón alterno pequeño (solo icono) */
+.btn-voice-ghost {
+  background: rgba(255, 255, 255, 0.03);
+  color: #dff7f6;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+.btn-voice-ghost:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Nota / ejemplos */
+.voice-note {
+  margin: 0;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* Responsive: adaptar ancho en móviles */
+@media (max-width: 720px) {
+  .voice-actions {
+    flex-wrap: wrap;
+  }
+  .btn-voice-large,
+  .btn-voice-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+  .voice-head {
+    gap: 10px;
+  }
+}
+
+.info-lado {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* separa los cuadros entre sí */
+  max-width: 400px; /* ancho más cómodo */
+  flex: 1;
+}
+

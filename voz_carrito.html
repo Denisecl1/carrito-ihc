@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" sizes="16x16"
+      href="https://img.icons8.com/fluency/16/microphone.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito por Voz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <div class="container">
+      <!-- Título principal -->
+      <h1>🚙 Control de Carrito por Voz</h1>
+
+      <!-- Botón para volver al control manual -->
+      <button id="openControlBtn" class="btn-gamepad" onclick="window.location.href='index.html'" title="Volver al control manual">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 10h1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 8v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 10h-1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 8v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="2" y="6" width="20" height="12" rx="3" stroke="currentColor" stroke-width="1.4" />
+        </svg>
+        &nbsp; Control Manual
+      </button>
+
+      <!-- Botón del micrófono -->
+      <button id="btn" class="btn-voice">🎙️ Activar micrófono</button>
+
+      <!-- Estado del reconocimiento -->
+      <div id="status">🔴 Micrófono inactivo</div>
+      <div id="action">Esperando comando...</div>
+
+      <!-- Nueva sección de frase guía -->
+      <div class="frase-guia">
+        <h3>🗣️ Frase guía</h3>
+        <p>Para controlar el carrito, di: <strong>“Mike adelante”</strong>, <strong>“Mike izquierda”</strong>, <strong>“Mike detener”</strong>, etc.</p>
+        <small>(El nombre “Mike” activa el reconocimiento del comando)</small>
+      </div>
+
+      <!-- Historial -->
+<h2>📜 Historial</h2>
+
+<div class="history-card">
+  <!-- barra de progreso tipo "contador de movimientos sesión" -->
+  <div class="progress-header">
+    <div class="progress-label">Movimientos (sesión)</div>
+    <div id="sessionCounter" class="session-counter">0/5</div>
+  </div>
+  <div class="progress-track" aria-hidden="true">
+    <div id="progressFill" class="progress-fill" style="width:0%"></div>
+  </div>
+
+  <!-- contenedor con scroll para la lista -->
+  <div class="history-container">
+    <ul id="history" class="history-list" aria-live="polite"></ul>
+  </div>
+
+  <div class="history-actions">
+    <button id="clearHistory">🗑️ Limpiar historial</button>
+  </div>
+</div>
+
+      <!-- Tema -->
+      <div class="toggle">
+        <button id="toggleMode">🌙 / ☀️ Cambiar tema</button>
+      </div>
+    </div>
+
+    <!-- Movimientos disponibles -->
+<section class="movimientos-bonitos">
+  <h2>🚗 Movimientos disponibles</h2>
+  <div class="movimientos-grid">
+    <div class="mov-card adelante">Adelante</div>
+    <div class="mov-card atras">Atrás</div>
+    <div class="mov-card detener">Detener</div>
+    <div class="mov-card vuelta-adelante-derecha">Vuelta adelante derecha</div>
+    <div class="mov-card vuelta-adelante-izquierda">Vuelta adelante izquierda</div>
+    <div class="mov-card vuelta-atras-derecha">Vuelta atrás derecha</div>
+    <div class="mov-card vuelta-atras-izquierda">Vuelta atrás izquierda</div>
+    <div class="mov-card giro90-derecha">Giro 90° derecha</div>
+    <div class="mov-card giro90-izquierda">Giro 90° izquierda</div>
+    <div class="mov-card giro360-derecha">Giro 360° derecha</div>
+    <div class="mov-card giro360-izquierda">Giro 360° izquierda</div>
+  </div>
+    </section>
+  </main>
+
+ <!-- Script principal -->
+  <script src="script.js" defer></script>
+</body>
+</html>
